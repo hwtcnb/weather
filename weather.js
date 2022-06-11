@@ -1,10 +1,10 @@
-import myJson from './city.list.json' assert {type: 'json'};
+import myJson from './cities.json' assert {type: 'json'};
 
 $(function () {
-    var availableTags = myJson.map((element) => element.name)
+    var availableTags = myJson.map((element) => element.city)
     $("#searchField").autocomplete({
         source: availableTags,
-        minLength: 3
+        minLength: 0
     });
 });
 
