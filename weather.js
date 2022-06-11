@@ -8,7 +8,6 @@ $(function () {
     });
 });
 
-
 async function currentWeather(city, utc) {
     
     let [temperature, feelsLike, humidity, pressure, localTime] = []
