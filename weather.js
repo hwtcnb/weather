@@ -17,11 +17,9 @@ async function currentWeather(city, utc) {
     let [temperature, feelsLike, humidity, pressure, localTime] = []
 
     await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=16727eaef267711b6e1616dd422158e5`)
-
         .then((response) => {
             return response.json();
         })
-
         .then((data) => {
             temperature = Math.ceil(data.main.temp - 271)
             feelsLike = Math.ceil(data.main.feels_like - 271)
