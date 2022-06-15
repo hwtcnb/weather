@@ -12,9 +12,9 @@ $(function () {
 
 });
 
-async function currentWeather(city, utc) {
+function currentWeather(city, utc) {
 
-    await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=16727eaef267711b6e1616dd422158e5`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=16727eaef267711b6e1616dd422158e5`)
         .then((response) => {
             if (response.status >= 200 && response.status < 300) {
                 return response.json();
@@ -43,28 +43,29 @@ async function currentWeather(city, utc) {
             setTimeout(() => {
                 alert(e.message);
             }, 500);
-            // clearInterval(liveWeather);
+            clearInterval(liveWeather);
         })
 }
 
-// let liveWeather;
+let liveWeather;
 
 document.querySelector('#search').addEventListener('click', function () {
 
-    // if (liveWeather) {
-    //     clearInterval(liveWeather);
-    // }
+    if (liveWeather) {
+        clearInterval(liveWeather);
+    }
 
     let city = document.querySelector('#searchField').value
     document.querySelector('#searchField').value = ''
-
-    // liveWeather = setInterval(() => {
     let utc = utcTime();
     currentWeather(city, utc)
-    // }, 1000);
 
+    liveWeather = setInterval(() => {
+        let utc = utcTime();
+        currentWeather(city, utc)
+    }, 1000);
+    
     document.querySelector('.weather').style.visibility = 'visible';
-
 })
 
 function utcTime() {
